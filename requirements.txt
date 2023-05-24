@@ -1,0 +1,7 @@
+pip==23.1.2
+streamlit==1.22.0
+torch
+numpy
+sentencepiece
+transformers
+tokenizers
