@@ -70,5 +70,9 @@ if st.button('피드백 받기'):
         st.success('(곱의 거듭제곱)을 잘하는구나!', icon="✅")
     else :
         st.info('(곱의 거듭제곱)을 다시 공부해보자!', icon="ℹ️")
+    if label[1] == 1:
+        st.success('(거듭제곱의 거듭제곱)을 잘하는구나!', icon="✅")
+    else :
+        st.info('(거듭제곱의 거듭제곱)을 다시 공부해보자!', icon="ℹ️")
 else : 
     st.button('피드백 받기 버튼을 눌러보세요!')
