@@ -42,8 +42,7 @@ model = RNNModel(output_d, c) #RNNModel 쓰는경우
 # model = LSTMModel(output_d, c) #LSTMModel 쓰는경우
 # model = ATTModel(output_d, c) #ATTModel 쓰는경우
 
-model.load_state_dict(torch.load("./save/"+model_name+".pt")).cpu()
-
+model.load_state_dict(torch.load("./save/"+model_name+".pt"))
 #자신에게 맞는 모델로 부르기
 tokenizer = AutoTokenizer.from_pretrained("./save/"+ model_name) #sp tokenizer 쓰는 경우
 # tokenizer = BertTokenizer.from_pretrained("./save/"+model_name+"-vocab.txt") #bw tokenizer 쓰는경우
