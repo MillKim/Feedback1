@@ -13,16 +13,17 @@ import numpy as np
 st.title("자동 채점 모델 기반 자동 피드백")
 st.write("**팀원** : 수학교육과 김명식, 김재훈, 김지영, 신인섭, 윤예린, 정유진")
 
-st.subheader("문항3-3")
-st.markdown("$A \div 3y/2 = 4x^{2}y + 2xy +6$ 일 때 다항식 $A$ 를 구하시오")
+st.subheader("문항 1-5")
+st.markdown("$(2a^{4})^{3}$=?")
+st.write("이거 풀면 고수ㅎ")
 response = st.text_input('답안 :', "답안을 작성해주세요")
 
 """
 자신의 모델에 맞는 변수 설정해주기
 """
-model_name = "3-3_rnn_sp_100" #모델 이름 넣어주기 확장자는 넣지말기!
+model_name = "1-5_rnn_sp_75" #모델 이름 넣어주기 확장자는 넣지말기!
 #모델에 맞는 hyperparameter 설정
-vs = 100 #vocab size
+vs = 75 #vocab size
 emb = 16 #default 값 지정 안했으면 건드리지 않아도 됨
 hidden = 32 #default 값 지정 안했으면 건드리지 않아도 됨
 nh = 4 #default 값 지정 안했으면 건드리지 않아도 됨
@@ -52,9 +53,9 @@ tokenizer = AutoTokenizer.from_pretrained("./save/"+ model_name) #sp tokenizer �
 enc = tokenizer(response)["input_ids"] #sp tokenizer
 # enc = tokenizer.encode(response) #bw tokenizer
 l = len(enc)
-if l < 100 :
-    pad = (100 - l) * [0] + enc
-else : pad = enc[l-100:]
+if l < max_len :
+    pad = (max_len - l) * [0] + enc
+else : pad = enc[l-max_len:]
 pad_ten = torch.tensor(pad)
 pad_ten = pad_ten.reshape(1,max_len)
 y = model(pad_ten)
@@ -66,8 +67,8 @@ if st.button('피드백 받기'):
     """
     st.write(response)
     if label[1] == 1:
-        st.success('(다항식) 곱하기 (단항식)을 잘하는구나!', icon="✅")
+        st.success('(곱의 거듭제곱) 과 (거듭제곱의 거듭제곱)을 잘하는구나!', icon="✅")
     else :
-        st.info('(다항식) 곱하기 (단항식)을 잘 생각해보자!', icon="ℹ️")
+        st.info('(곱의 거듭제곱) 또는 (거듭제곱의 거듭제곱)을 다시 공부해보자!', icon="ℹ️")
 else : 
     st.button('피드백 받기 버튼을 눌러보세요!')
