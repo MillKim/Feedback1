@@ -31,7 +31,7 @@ nh = 4 #default 값 지정 안했으면 건드리지 않아도 됨
 device = "cpu" #default 값 지정 안했으면 건드리지 않아도 됨
 max_len = 100
 #output_d 설정
-output_d = 5 #자기의 모델에 맞는 output_d구하기 (지식요소 개수)
+output_d = 2 #자기의 모델에 맞는 output_d구하기 (지식요소 개수)
 c = cfg(vs=vs, emb=emb, hidden=hidden, nh=nh, device=device)
 
 
@@ -67,9 +67,13 @@ if st.button('피드백 받기'):
     output차원에 맞추어 피드백 넣기
     """
     st.write(response)
-    if label[2] == 1:
-        st.success('(곱의 거듭제곱) 과 (거듭제곱의 거듭제곱)을 잘하는구나!', icon="✅")
+    if label[0] == 1:
+        st.success('(곱의 거듭제곱)을 잘하는구나!', icon="✅")
     else :
-        st.info('(곱의 거듭제곱) 또는 (거듭제곱의 거듭제곱)을 다시 공부해보자!', icon="ℹ️")
+        st.info('(곱의 거듭제곱)을 다시 공부해보자!', icon="ℹ️")
+    if label[1] == 1:
+        st.success('(거듭제곱의 거듭제곱)을 잘하는구나!', icon="✅")
+    else :
+        st.info('(거듭제곱의 거듭제곱)을 다시 공부해보자!', icon="ℹ️")
 else : 
     st.button('피드백 받기 버튼을 눌러보세요!')
