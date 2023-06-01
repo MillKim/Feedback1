@@ -13,25 +13,24 @@ import numpy as np
 st.title("자동 채점 모델 기반 자동 피드백")
 st.write("**팀원** : 수학교육과 김명식, 김재훈, 김지영, 신인섭, 윤예린, 정유진")
 
-st.subheader("문항 1-5")
-st.markdown("$(2a^{4})^{3}$=?")
-st.write("이거 풀면 고수ㅎ")
+st.subheader("문항 3-3")
+st.markdown("$A \div 3y/2 = 4x^{2}y + 2xy + 6$일 때, 다항식 $A$를 구하시오.")
 response = st.text_input('답안 :', "답안을 작성해주세요")
 
 """
 자신의 모델에 맞는 변수 설정해주기
 """
 
-model_name = "1-5_rnn_sp_90" #모델 이름 넣어주기 확장자는 넣지말기!
+model_name = "3-3_rnn_sp_80" #모델 이름 넣어주기 확장자는 넣지말기!
 #모델에 맞는 hyperparameter 설정
-vs = 90 #vocab size
+vs = 80 #vocab size
 emb = 16 #default 값 지정 안했으면 건드리지 않아도 됨
 hidden = 32 #default 값 지정 안했으면 건드리지 않아도 됨
 nh = 4 #default 값 지정 안했으면 건드리지 않아도 됨
 device = "cpu" #default 값 지정 안했으면 건드리지 않아도 됨
 max_len = 100
 #output_d 설정
-output_d = 2 #자기의 모델에 맞는 output_d구하기 (지식요소 개수)
+output_d = 5 #자기의 모델에 맞는 output_d구하기 (지식요소 개수)
 c = cfg(vs=vs, emb=emb, hidden=hidden, nh=nh, device=device)
 
 
@@ -65,6 +64,11 @@ if st.button('피드백 받기'):
     """
     output차원에 맞추어 피드백 넣기
     """
+    # 0: 등식의 성질
+    # 1: 다항식과 단항식의 곱셈
+    # 2: 단항식과 단항식의 곱셈
+    # 3: 다항식과 단항식의 나눗셈
+    # 4: 단항식과 단항식의 나눗셈
     st.write(response)
     if label[0] == 1:
         st.success('(곱의 거듭제곱)을 잘하는구나!', icon="✅")
