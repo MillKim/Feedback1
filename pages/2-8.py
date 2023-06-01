@@ -22,9 +22,9 @@ response = st.text_input('답안 :', "답안을 작성해주세요")
 자신의 모델에 맞는 변수 설정해주기
 """
 
-model_name = "2-8_rnn_sp_140" #모델 이름 넣어주기 확장자는 넣지말기!
+model_name = "2-8_rnn_sp_120" #모델 이름 넣어주기 확장자는 넣지말기!
 #모델에 맞는 hyperparameter 설정
-vs = 140 #vocab size
+vs = 120 #vocab size
 emb = 16 #default 값 지정 안했으면 건드리지 않아도 됨
 hidden = 32 #default 값 지정 안했으면 건드리지 않아도 됨
 nh = 4 #default 값 지정 안했으면 건드리지 않아도 됨
@@ -66,13 +66,21 @@ if st.button('피드백 받기'):
     output차원에 맞추어 피드백 넣기
     """
     st.write(response)
-    if label[0] == 1:
-        st.success('(분배법칙)을 잘하는구나!', icon="✅")
+    if label[0] + label[4] == 2:
+        st.success('분배법칙을 잘하는구나!', icon="✅")
     else :
-        st.info('(분배법칙)을 다시 공부해보자!', icon="ℹ️")
-    if label[1] == 1:
-        st.success('(다항식의 덧셈)을 잘하는구나!', icon="✅")
+        st.info('분배법칙을 다시 공부해보자!', icon="ℹ️")
+    if label[1] + label[5] == 2:
+        st.success('다항식의 덧셈을 잘하는구나!', icon="✅")
     else :
-        st.info('(다항식의 덧셈)을 다시 공부해보자!', icon="ℹ️")
+        st.info('다항식의 덧셈을 다시 공부해보자!', icon="ℹ️")
+    if label[2] == 1:
+        st.success('대입을 잘하는구나!', icon="✅")
+    else :
+        st.info('대입을 다시 공부해보자!', icon="ℹ️")
+    if label[3] == 1:
+        st.success('계산을 효율적으로 잘하는구나!', icon="✅")
+    else :
+        st.info('효율적인 풀이의 순서를 생각해보자', icon="ℹ️")
 else : 
     st.button('피드백 받기 버튼을 눌러보세요!')
